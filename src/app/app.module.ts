@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {TransferHttpCacheModule} from '@nguniversal/common';
 import { CommonModule } from "@angular/common";
-import { HttpClient} from "@angular/http";
 import { HttpClientModule } from '@angular/common/http'; 
 import { ChatService } from './chatbot/chat.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbdModalBasic} from './modal-basic';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NgbdModalBasic
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { ChatService } from './chatbot/chat.service';
       { path: 'chat', loadChildren: './chatbot/chat.module#ChatModule'}
     ]),
     TransferHttpCacheModule,
+    NgbModule.forRoot()
   ],
   providers: [
     ChatService
