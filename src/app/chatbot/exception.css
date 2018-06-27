@@ -1,6 +1,3 @@
-.col-centered {
-    margin : 0 auto;
-}
 .chat-list {
     height:500px;
     max-height: 60%;
@@ -16,7 +13,9 @@
 }
 
 .chat-input-box {
+    border-bottom: none !important;
     padding: 10px !important;
+    margin : 0 !important;
 }
 
 .chat-input-box:focus {

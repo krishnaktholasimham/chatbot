@@ -49,45 +49,33 @@
   .navbar-nav  li a:hover {
       color: #1abc9c !important;
   }
-  .bot-div {
-    float : right;
-  }
   </style>
 </head>
 <body>
 
 <!-- First Container -->
+<!-- First Container -->
 <div class="container-fluid bg-1 text-center">
   <div class="row">
-    <div class="col-sm-12 col-lg-8 col-centered">
+    <div class="col s12 l8 col-centered">
       <div class="card">
-        <div style="padding:10px;border-bottom:1px solid lightgrey">
-          Exception Hub
-        </div>
-        <div class="divider"></div>
-        <div class="chat-list">
-          <div class="chat-messages">
-            <div *ngFor="let message of conversation" [ngClass]="{ 'me-div' : message.from == 'Me', 'bot-div' : message.from == 'Bot' }">
-              <div class="inline" *ngIf="message.from == 'Me'">
-                <i class="mdi mdi-human"></i>
-              </div>
-              <div class="inline" [ngClass]="{ 'chat-me-message' : message.from == 'Me', 'chat-bot-message' : message.from == 'Bot' }"> <span [innerHTML]="message.content"></span> </div>
-              <div class="inline" *ngIf="message.from == 'Bot'">
-                <i class="mdi mdi-laptop-windows"></i>
-              </div>
+        <div class="row">
+          <div class="col-sm-12 col-lg-12">
+            <div class="input-field">
+              <label for="exception_key">Exception</label>
+              <input type="text" [(ngModel)]="exception" id="exception_key">
             </div>
           </div>
-          <div class="input-field chat-input">
-              <input type="text" 
-                     #message
-                     id="chat-message"
-                     class="chat-input-box"
-                     placeholder="Message" 
-                     style="width:100%;border:none"
-                     color="Black"
-                     (keyup.enter)="addMessageFromUser(message)">
-              <i class="mdi mdi-eye plt-icon suffix" style="line-height:64px" (click)="addMessageFromUser(message)"></i>
+          <div class="col-sm-12 col-lg-12">
+            <div class="input-field">
+              <label for="exception_solution">Solution</label>
+              <textarea [(ngModel)]="exception" id="exception_solution"></textarea>
+            </div>
           </div>
+          <div class="col-sm-12 col-lg-12">
+            <a class="btn btn-primary right">Submit</a>
+          </div>
+          
         </div>
       </div>
     </div>
