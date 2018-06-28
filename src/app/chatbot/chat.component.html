@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Chatbot</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-  body {
+    body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
       color: #f5f6f7;
-  }
-  p {font-size: 16px;}
-  .margin {margin-bottom: 45px;}
-  .bg-1 { 
-      background-color: #67827c; /* Green */
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    .margin {
+      margin-bottom: 45px;
+    }
+
+    .bg-1 {
+      background-color: #67827c;
+      /* Green */
       color: #2f2f2f;
-  }
-  .bg-2 { 
-      background-color: #474e5d; /* Dark Blue */
+    }
+
+    .bg-2 {
+      background-color: #474e5d;
+      /* Dark Blue */
       color: #ffffff;
-  }
-  .bg-3 { 
-      background-color: #ffffff; /* White */
+    }
+
+    .bg-3 {
+      background-color: #ffffff;
+      /* White */
       color: #555555;
-  }
-  .bg-4 { 
-      background-color: #2f2f2f; /* Black Gray */
+    }
+
+    .bg-4 {
+      background-color: #2f2f2f;
+      /* Black Gray */
       color: #fff;
-  }
-  .container-fluid {
+    }
+
+    .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
-  }
-  .navbar {
+    }
+
+    .navbar {
       padding-top: 15px;
       padding-bottom: 15px;
       border: 0;
@@ -45,59 +62,54 @@
       margin-bottom: 0;
       font-size: 12px;
       letter-spacing: 5px;
-  }
-  .navbar-nav  li a:hover {
+    }
+
+    .navbar-nav li a:hover {
       color: #1abc9c !important;
-  }
-  .bot-div {
-    float : right;
-  }
+    }
   </style>
 </head>
+
 <body>
 
-<!-- First Container -->
-<div class="container-fluid bg-1 text-center">
-  <div class="row">
-    <div class="col-sm-12 col-lg-8 col-centered">
-      <div class="card">
-        <div style="padding:10px;border-bottom:1px solid lightgrey">
-          Exception Hub
-        </div>
-        <div class="divider"></div>
-        <div class="chat-list">
-          <div class="chat-messages">
-            <div *ngFor="let message of conversation" [ngClass]="{ 'me-div' : message.from == 'Me', 'bot-div' : message.from == 'Bot' }">
-              <div class="inline" *ngIf="message.from == 'Me'">
-                <i class="mdi mdi-human"></i>
-              </div>
-              <div class="inline" [ngClass]="{ 'chat-me-message' : message.from == 'Me', 'chat-bot-message' : message.from == 'Bot' }"> <span [innerHTML]="message.content"></span> </div>
-              <div class="inline" *ngIf="message.from == 'Bot'">
-                <i class="mdi mdi-laptop-windows"></i>
+  <!-- First Container -->
+  <div class="container-fluid bg-1 text-center">
+    <div class="row">
+      <div class="col-sm-12 col-lg-8 col-centered">
+        <div class="card">
+          <div style="padding:10px;border-bottom:1px solid lightgrey">
+            Exception Hub
+          </div>
+          <div class="divider"></div>
+          <div class="chat-list">
+            <div class="chat-messages" #chatwindow style="font-size:16px">
+              <div *ngFor="let message of conversation" [ngClass]="{ 'me-div' : message.from == 'Me', 'bot-div' : message.from == 'Bot' }">
+                <div class="inline" *ngIf="message.from == 'Me'">
+                  <i class="mdi mdi-human"></i>
+                </div>
+                <div class="inline" [ngClass]="{ 'chat-me-message' : message.from == 'Me', 'chat-bot-message' : message.from == 'Bot' }">
+                  <span [innerHTML]="message.content"></span>
+                </div>
+                <div class="inline" *ngIf="message.from == 'Bot'">
+                  <i class="mdi mdi-laptop-windows"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="input-field chat-input">
-              <input type="text" 
-                     #message
-                     id="chat-message"
-                     class="chat-input-box"
-                     placeholder="Message" 
-                     style="width:100%;border:none"
-                     color="Black"
-                     (keyup.enter)="addMessageFromUser(message)">
+            <div class="input-field chat-input">
+              <input type="text" #message id="chat-message" class="chat-input-box" placeholder="Enter your message here" style="width:100%;border:none"
+                color="Black" (keyup.enter)="addMessageFromUser(message)">
               <i class="mdi mdi-eye plt-icon suffix" style="line-height:64px" (click)="addMessageFromUser(message)"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="loader" *ngIf="loading">
+        <svg class="spinner spinnerCenter" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+    </div>
   </div>
-</div>
 </body>
+
 </html>
-
-
-
-
-
-
